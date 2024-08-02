@@ -1,4 +1,3 @@
-
 // Import the 'pool' object so our helper functions can interact with the PostgreSQL database
 import { pool } from "./db/index.js";
 
@@ -12,13 +11,19 @@ export async function getAlbums() {
 export async function getAlbumById(id) {
   // Query the database and return the resource with a matching id or null
   const queryText = `SELECT * FROM albums
-                      WHERE id = $1`                    
+                      WHERE id = $1`;
   const result = await pool.query(queryText, [id]);
-  return result.rows[0] || null;                    
+  return result.rows[0] || null;
 }
 
-export async function createResourceTwo(resource) {
+export async function createAlbum({ title, published_date, artist_id }) {
   // Query the database to create an resource and return the newly created resource
+  const queryText = `INSERT INTO albums (title, published_date, artist_id) 
+  VALUES ($1, $2, $3)
+  RETURNING *`;
+  const values = [title, published_date, artist_id];
+  const result = await pool.query(queryText, values);
+  return result.rows[0];
 }
 
 export async function updateResourceTwoById(id, updates) {

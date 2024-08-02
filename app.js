@@ -14,9 +14,10 @@ import {
 import {
   getAlbums,
   getAlbumById,
-  createResourceTwo,
+  createAlbum,
   updateResourceTwoById,
   deleteResourceTwoById,
+  // createAlbum,
 } from "./Albums.js";
 
 // Initialize the express app
@@ -72,8 +73,7 @@ app.delete("/resourceone/:id", async function (req, res) {});
 // Endpoint to retrieve all <resource_twos>
 
 app.get("/albums/", async function (req, res) {
-  
-//Waiting for async function getAlbums
+  //Waiting for async function getAlbums
   const albums = await getAlbums();
   res.status(200).json({ status: "success", data: albums });
 });
@@ -84,15 +84,19 @@ app.get("/albums/", async function (req, res) {
 app.get("/albums/:id", async function (req, res) {
   const id = req.params.id;
   const album = await getAlbumById(id);
-if (!album) {
-  res.status(404).send('Album Not Found')
-} else {
-  res.status(200).json({ status: "success", data: album });
+  if (!album) {
+    res.status(404).send("Album Not Found");
+  } else {
+    res.status(200).json({ status: "success", data });
   }
 });
 
 // Endpoint to create a new <resource_twos>
-app.post("/resourcetwo/", async function (req, res) {});
+app.post("/albums/", async function (req, res) {
+  const data = req.body;
+  const newAlbum = await createAlbum(data);
+  res.status(301).json({ status: "success", data: newAlbum });
+});
 
 // Endpoint to update a specific <resource_twos> by id
 app.patch("/resourcetwo/:id", async function (req, res) {});
