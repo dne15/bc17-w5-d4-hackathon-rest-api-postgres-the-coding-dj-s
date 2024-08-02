@@ -8,16 +8,16 @@ import {
   createArtists,
   updateArtistsById,
   deleteArtistsById,
-} from "./resource_one.js";
+} from "./Artists.js";
 
 //Import your helper functions for your second resource here
 import {
   getAlbums,
- getResourceTwoById,
+  getAlbumById,
   createResourceTwo,
   updateResourceTwoById,
   deleteResourceTwoById,
-} from "./resource_two.js";
+} from "./Albums.js";
 
 // Initialize the express app
 const app = express();
@@ -81,7 +81,15 @@ app.get("/albums/", async function (req, res) {
 //Waiting for async function getAlbums
 
 // Endpoint to retrieve a <resource_twos> by id
-app.get("/resourcetwo/:id", async function (req, res) {});
+app.get("/albums/:id", async function (req, res) {
+  const id = req.params.id;
+  const album = await getAlbumById(id);
+if (!album) {
+  res.status(404).send('Album Not Found')
+} else {
+  res.status(200).json({ status: "success", data: album });
+  }
+});
 
 // Endpoint to create a new <resource_twos>
 app.post("/resourcetwo/", async function (req, res) {});
