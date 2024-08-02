@@ -15,7 +15,7 @@ import {
   getAlbums,
   getAlbumById,
   createAlbum,
-  updateResourceTwoById,
+  updateAlbumById,
   deleteResourceTwoById,
   // createAlbum,
 } from "./Albums.js";
@@ -62,7 +62,7 @@ app.patch("/artists/:id", async function (req, res) {
   const data = req.body.id;
   const artists = await getArtists();
   const updateArtist = await updateArtistsById(data);
-  res.status(301).json({ status: "success", data: updateArtist });
+  res.status(201).json({ status: "success", data: updateArtist });
 });
 
 // Endpoint to delete a specific <resource_one> by id
@@ -95,11 +95,14 @@ app.get("/albums/:id", async function (req, res) {
 app.post("/albums/", async function (req, res) {
   const data = req.body;
   const newAlbum = await createAlbum(data);
-  res.status(301).json({ status: "success", data: newAlbum });
+  res.status(201).json({ status: "success", data: newAlbum });
 });
 
 // Endpoint to update a specific <resource_twos> by id
-app.patch("/resourcetwo/:id", async function (req, res) {});
+app.patch("/albums/:id", async function (req, res) {});
+  const id = req.params.id
+  const albumsUpdate = await updateAlbumById(id)
+  res.status(200).json({status: "success", data: albumsUpdate})
 
 // Endpoint to delete a specific <resource_twos> by id
 app.delete("/resourcetwo/:id", async function (req, res) {});

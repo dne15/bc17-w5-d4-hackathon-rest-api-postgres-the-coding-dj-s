@@ -44,7 +44,7 @@ async function resetDatabase() {
             ('Dua Lipa', '2017-06-02', 1),
             ('Future Nostalgia', '2020-03-27', 1),
             ('Reasonable Doubt', '1996-06-25', 2),
-            ('The Blueprint', '2001-09-11', 2);
+            ('The Red', '2001-09-11', 2);
     `);
 
     console.log("Database reset successful");
