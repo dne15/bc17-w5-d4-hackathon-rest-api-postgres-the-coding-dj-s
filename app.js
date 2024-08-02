@@ -99,10 +99,10 @@ app.post("/albums/", async function (req, res) {
 });
 
 // Endpoint to update a specific <resource_twos> by id
-app.patch("/albums/:id", async function (req, res) {});
-  const id = req.params.id
+app.patch("/albums/:id", async function (req, res) {const id = req.params.id
   const albumsUpdate = await updateAlbumById(id)
-  res.status(200).json({status: "success", data: albumsUpdate})
+  res.status(200).json({status: "success", data: albumsUpdate})});
+  
 
 // Endpoint to delete a specific <resource_twos> by id
 app.delete("/resourcetwo/:id", async function (req, res) {});

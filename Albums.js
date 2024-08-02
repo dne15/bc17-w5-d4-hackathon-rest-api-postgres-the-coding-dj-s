@@ -26,8 +26,12 @@ export async function createAlbum({ title, published_date, artist_id }) {
   return result.rows[0];
 }
 
-export async function updateResourceTwoById(id, updates) {
+export async function updateAlbumById(id, updates) {
   // Query the database to update the resource and return the newly updated resource or null
+ const queryText = `UPDATE album SET title = $1, published_date = $2, artist_id = $3 WHERE id = $4`
+ const values = [id, updates]
+ const result = await pool.query(queryText, values);
+ return result.rows[0];
 }
 
 export async function deleteResourceTwoById(id) {
