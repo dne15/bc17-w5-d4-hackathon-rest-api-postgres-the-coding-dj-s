@@ -10,14 +10,14 @@ import {
   deleteArtistsById,
 } from "./resource_one.js";
 
-// Import your helper functions for your second resource here
-// import {
-//   getResourceTwo,
-//   getResourceTwoById,
-//   createResourceTwo,
-//   updateResourceTwoById,
-//   deleteResourceTwoById,
-// } from "./resource_two.js";
+//Import your helper functions for your second resource here
+import {
+  getAlbums,
+ getResourceTwoById,
+  createResourceTwo,
+  updateResourceTwoById,
+  deleteResourceTwoById,
+} from "./resource_two.js";
 
 // Initialize the express app
 const app = express();
@@ -70,10 +70,15 @@ app.delete("/resourceone/:id", async function (req, res) {});
 // Resource Two Route Handlers
 
 // Endpoint to retrieve all <resource_twos>
-app.get("/resourcetwo/", async function (req, res) {
-  const authors = await getAuthors();
-  res.status(200).json({ status: "success", data: authors });
+
+app.get("/albums/", async function (req, res) {
+  
+//Waiting for async function getAlbums
+  const albums = await getAlbums();
+  res.status(200).json({ status: "success", data: albums });
 });
+
+//Waiting for async function getAlbums
 
 // Endpoint to retrieve a <resource_twos> by id
 app.get("/resourcetwo/:id", async function (req, res) {});
